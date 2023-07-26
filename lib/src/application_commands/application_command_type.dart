@@ -9,10 +9,15 @@ enum ApplicationCommandType {
 
   const ApplicationCommandType(this.value, this.name);
 
-  /// [value] is [1,3] and [values] is [0,2] so we subtract 1
-  factory ApplicationCommandType.fromJsonValue(int i) =>
-      ApplicationCommandType.values[i - 1];
-
   final int value;
   final String name;
+
+  factory ApplicationCommandType.fromInt(int i) {
+    return switch (i) {
+      1 => ApplicationCommandType.chatInput,
+      2 => ApplicationCommandType.user,
+      3 => ApplicationCommandType.message,
+      _ => throw '$i does not correspond to a valid ChannelType.'
+    };
+  }
 }
