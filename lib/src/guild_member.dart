@@ -1,6 +1,6 @@
+import 'package:discord_application_utils/src/snowflake.dart';
 import 'package:json_utils/json_utils.dart';
 
-import 'role.dart';
 import 'user.dart';
 
 // https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure
@@ -29,7 +29,7 @@ class GuildMember {
   final String? avatar;
 
   // array of role object ids
-  final List<Role> roles;
+  final List<Snowflake> roles;
 
   // when the user joined the guild
   final DateTime joinedAt;
@@ -76,7 +76,9 @@ class GuildMember {
         userJson == null ? null : User.fromJson(userJson),
         nick,
         avatar,
-        List<Role>.from(rolesJsonList),
+        rolesJsonList
+            .map<Snowflake>((e) => Snowflake.fromJson(e as String))
+            .toList(),
         DateTime.parse(joinedAtString),
         premiumSinceString == null ? null : DateTime.parse(premiumSinceString),
         deaf,

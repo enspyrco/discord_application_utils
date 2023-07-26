@@ -7,7 +7,7 @@ import '../guild_member.dart';
 import '../user.dart';
 import 'interaction_data.dart';
 
-// Docs - Interaction Object : https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
+// https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
 class Interaction {
   Interaction._(
     this.id,
@@ -88,34 +88,47 @@ class Interaction {
     if (json
         case {
           'id': String id,
-          'applicationId': String applicationId,
+          'application_id': String applicationId,
           'type': int type,
-          'data': JsonMap? dataJson,
-          'guildId': String? guildId,
-          'channel': JsonMap? channelJsonMap,
-          'channelId': String? channelId,
-          'member': JsonMap? memberJsonMap,
-          'user': JsonMap? userJson,
           'token': String token,
           'version': int version,
-          'message': JsonMap? messsageJson,
-          'appPermissions': String? appPermissions,
-          'locale': String? locale,
-          'guildLocale': String? guildLocale,
         }) {
+      var (
+        JsonMap? data,
+        String? guildId,
+        JsonMap? channel,
+        String? channelId,
+        JsonMap? member,
+        JsonMap? user,
+        JsonMap? messsage,
+        String? appPermissions,
+        String? locale,
+        String? guildLocale,
+      ) = (
+        json['data'] as JsonMap?,
+        json['guild_id'] as String?,
+        json['channel'] as JsonMap?,
+        json['channel_id'] as String?,
+        json['member'] as JsonMap?,
+        json['user'] as JsonMap?,
+        json['message'] as JsonMap?,
+        json['app_permissions'] as String?,
+        json['locale'] as String?,
+        json['guild_locale'] as String?,
+      );
       return Interaction._(
         id,
         applicationId,
         InteractionType.fromInt(type),
-        dataJson == null ? null : InteractionData.fromJson(dataJson),
+        data == null ? null : InteractionData.fromJson(data),
         guildId,
-        channelJsonMap == null ? null : Channel.fromJson(channelJsonMap),
+        channel == null ? null : Channel.fromJson(channel),
         channelId,
-        memberJsonMap == null ? null : GuildMember.fromJson(memberJsonMap),
-        userJson == null ? null : User.fromJson(userJson),
+        member == null ? null : GuildMember.fromJson(member),
+        user == null ? null : User.fromJson(user),
         token,
         version,
-        messsageJson == null ? null : Message.fromJson(messsageJson),
+        messsage == null ? null : Message.fromJson(messsage),
         appPermissions,
         locale,
         guildLocale,
@@ -126,7 +139,7 @@ class Interaction {
         'application_id': String,
         'type': int,
         'data': Nullable<JsonMap>,
-        'guildId': Nullable<String>,
+        'guild_id': Nullable<String>,
         'channel': Nullable<JsonMap>,
         'channel_id': Nullable<String>,
         'member': Nullable<JsonMap>,

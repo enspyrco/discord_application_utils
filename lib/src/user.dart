@@ -72,7 +72,7 @@ class User {
 
   // the user's email
   // OAuth2 Scope: email
-  final String email;
+  final String? email;
 
   // the flags on a user's account
   // OAuth2 Scope: identify
@@ -96,21 +96,36 @@ class User {
           'id': String id,
           'username': String username,
           'discriminator': String discriminator,
-          'globalName': String? globalName,
+          'global_name': String? globalName,
           'avatar': String? avatar,
-          'bot': bool? bot,
-          'system': bool? system,
-          'mfaEnabled': bool? mfaEnabled,
-          'banner': String? banner,
-          'accentColor': int? accentColor,
-          'locale': String? locale,
-          'verified': bool? verified,
-          'email': String email,
-          'flags': int? flags,
-          'premiumType': int? premiumType,
-          'publicFlags': int? publicFlags,
-          'avatarDecoration': String? avatarDecoration,
         }) {
+      var (
+        bool? bot,
+        bool? system,
+        bool? mfaEnabled,
+        String? banner,
+        int? accentColor,
+        String? locale,
+        bool? verified,
+        String? email,
+        int? flags,
+        int? premiumType,
+        int? publicFlags,
+        String? avatarDecoration,
+      ) = (
+        json['bot'] as bool?,
+        json['system'] as bool?,
+        json['mfa_enabled'] as bool?,
+        json['banner'] as String?,
+        json['accent_color'] as int?,
+        json['locale'] as String?,
+        json['verified'] as bool?,
+        json['email'] as String?,
+        json['flags'] as int?,
+        json['premium_type'] as int?,
+        json['public_flags'] as int?,
+        json['avatar_decoration'] as String?,
+      );
       return User._(
         id,
         username,
@@ -131,28 +146,25 @@ class User {
         avatarDecoration,
       );
     } else {
-      throw MalformedJsonException('''
-      Expected:
-        {
-          'id': String,
-          'username': String,
-          'discriminator': String,
-          'globalName': String?,
-          'avatar': String?,
-          'bot': bool?,
-          'system': bool?,
-          'mfaEnabled': bool?,
-          'banner': String?,
-          'accentColor': int?,
-          'locale': String?,
-          'verified': bool?,
-          'email': String,
-          'flags': int?,
-          'premiumType': int?,
-          'publicFlags': int?,
-          'avatarDecoration': String?,
-        }
-      ''', json);
+      throw MalformedJsonMapException({
+        'id': String,
+        'username': String,
+        'discriminator': String,
+        'global_name': Nullable<String>,
+        'avatar': Nullable<String>,
+        'bot': Nullable<bool>,
+        'system': Nullable<bool>,
+        'mfa_enabled': Nullable<bool>,
+        'banner': Nullable<String>,
+        'accent_color': Nullable<int>,
+        'locale': Nullable<String>,
+        'verified': Nullable<bool>,
+        'email': Nullable<String>,
+        'flags': Nullable<int>,
+        'premium_type': Nullable<int>,
+        'public_flags': Nullable<int>,
+        'avatar_decoration': Nullable<String>,
+      }, json);
     }
   }
 }

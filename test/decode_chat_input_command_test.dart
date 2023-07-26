@@ -8,14 +8,16 @@ import 'data/encoded_chat_input_command.dart' as test_data;
 
 void main() {
   //
-  test('An invalid Discord message gets caught', () {
+  test('An valid slash command with an option is parsed correctly', () {
     final String jsonString = utf8.decode(base64.decode(test_data.encodedData));
     final JsonMap decodedJson = json.decode(jsonString) as JsonMap;
     print('decodedMessageJson: $jsonString');
 
     final Interaction interaction = Interaction.fromJson(decodedJson);
 
-    // expect(interactionData.applicationId, '1126810994593771540');
+    expect(interaction.applicationId, '1126810994593771540');
+    expect(interaction.data?.options.first.name, 'url');
+    expect(interaction.data?.options.first.value, 'testing any value');
     // expect(data.token, 'fakeToken0');
     // expect(
     //     data.content,

@@ -21,7 +21,7 @@ class InteractionDataOption {
   final Object? value;
 
   // Present if this option is a group or subcommand
-  final List<InteractionDataOption> options;
+  final List<InteractionDataOption>? options;
 
   // true if this option is the currently focused option for autocomplete
   final bool? focused;
@@ -31,17 +31,23 @@ class InteractionDataOption {
         case {
           'name': String name,
           'type': int type,
-          'value': Object? value,
-          'options': List<JsonMap>? options,
-          'focused': bool? focused,
         }) {
+      var (
+        Object? value,
+        JsonList? options,
+        bool? focused,
+      ) = (
+        json['value'],
+        json['options'] as List<JsonMap>?,
+        json['focused'] as bool?
+      );
       return InteractionDataOption._(
         name,
         type,
         value,
-        (options ?? [])
-            .map<InteractionDataOption>(
-                (e) => InteractionDataOption.fromJson(e))
+        options
+            ?.map<InteractionDataOption>(
+                (e) => InteractionDataOption.fromJson(e as JsonMap))
             .toList(),
         focused,
       );

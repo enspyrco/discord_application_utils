@@ -22,8 +22,8 @@ class Channel {
     this.nsfw,
     this.lastMessageId,
     this.bitrate,
-    this.user_limit,
-    this.rate_limit_per_user,
+    this.userLimit,
+    this.rateLimitPerUser,
     this.recipients,
     this.icon,
     this.ownerId,
@@ -32,21 +32,21 @@ class Channel {
     this.parentId,
     this.lastPinTimestamp,
     this.rtcRegion,
-    this.video_quality_mode,
-    this.message_count,
-    this.member_count,
-    this.thread_metadata,
+    this.videoQualityMode,
+    this.messageCount,
+    this.memberCount,
+    this.threadMetadata,
     this.member,
-    this.default_auto_archive_duration,
+    this.defaultAutoArchiveDuration,
     this.permissions,
     this.flags,
-    this.total_message_sent,
-    this.available_tags,
-    this.applied_tags,
-    this.default_reaction_emoji,
-    this.default_thread_rate_limit_per_user,
-    this.default_sort_order,
-    this.default_forum_layout,
+    this.totalMessageSent,
+    this.availableTags,
+    this.appliedTags,
+    this.defaultReactionEmoji,
+    this.defaultThreadRateLimitPerUser,
+    this.defaultSortOrder,
+    this.defaultForumLayout,
   );
 
   // the id of this channel
@@ -62,7 +62,7 @@ class Channel {
   final int? position;
 
   // explicit permission overwrites for members and roles
-  final List<Overwrite> permissionOverwrites;
+  final List<Overwrite>? permissionOverwrites;
 
   // the name of the channel (1-100 characters)
   final String? name;
@@ -80,14 +80,14 @@ class Channel {
   final int? bitrate;
 
   // the user limit of the voice channel
-  final int? user_limit;
+  final int? userLimit;
 
   // amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected
   // rate_limit_per_user also applies to thread creation. Users can send one message and create one thread during each rate_limit_per_user interval.
-  final int? rate_limit_per_user;
+  final int? rateLimitPerUser;
 
   // the recipients of the DM
-  final List<User> recipients;
+  final List<User>? recipients;
 
   // icon hash of the group DM
   final String? icon;
@@ -112,23 +112,23 @@ class Channel {
   final String? rtcRegion;
 
   // the camera video quality mode of the voice channel, 1 when not present
-  final int? video_quality_mode;
+  final int? videoQualityMode;
 
   // number of messages (not including the initial message or deleted messages) in a thread.
   // For threads created before July 1, 2022, the message count is inaccurate when it's greater than 50.
-  final int? message_count;
+  final int? messageCount;
 
   // an approximate count of users in a thread, stops counting at 50
-  final int? member_count;
+  final int? memberCount;
 
   // thread-specific fields not needed by other channels
-  final ThreadMetadata? thread_metadata;
+  final ThreadMetadata? threadMetadata;
 
   // thread member object for the current user, if they have joined the thread, only included on certain API endpoints
   final ThreadMember? member;
 
   // default duration, copied onto newly created threads, in minutes, threads will stop showing in the channel list after the specified period of inactivity, can be set to: 60, 1440, 4320, 10080
-  final int? default_auto_archive_duration;
+  final int? defaultAutoArchiveDuration;
 
   // computed permissions for the invoking user in the channel, including overwrites, only included when part of the resolved data received on a slash command interaction
   final String? permissions;
@@ -137,144 +137,180 @@ class Channel {
   final int? flags;
 
   // number of messages ever sent in a thread, it's similar to message_count on message creation, but will not decrement the number when a message is deleted
-  final int? total_message_sent;
+  final int? totalMessageSent;
 
   // the set of tags that can be used in a GUILD_FORUM channel
-  final List<ForumTag> available_tags;
+  final List<ForumTag>? availableTags;
 
   // the IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
-  final List<Snowflake> applied_tags;
+  final List<Snowflake>? appliedTags;
 
   // the emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
-  final DefaultReaction? default_reaction_emoji;
+  final DefaultReaction? defaultReactionEmoji;
 
   // integer	the initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
-  final int? default_thread_rate_limit_per_user;
+  final int? defaultThreadRateLimitPerUser;
 
   // the default sort order type used to order posts in GUILD_FORUM channels. Defaults to null, which indicates a preferred sort order hasn't been set by a channel admin
-  final int? default_sort_order;
+  final int? defaultSortOrder;
 
   // the default forum layout view used to display posts in GUILD_FORUM channels. Defaults to 0, which indicates a layout view has not been set by a channel admin
-  final int? default_forum_layout;
+  final int? defaultForumLayout;
 
   factory Channel.fromJson(JsonMap json) {
     if (json
         case {
-          'id': Snowflake id,
-          'type': ChannelType type,
-          'guildId': Snowflake? guildId,
-          'position': int? position,
-          'permissionOverwrites': List<Overwrite> permissionOverwrites,
-          'name': String? name,
-          'topic': String? topic,
-          'nsfw': bool? nsfw,
-          'lastMessageId': Snowflake? lastMessageId,
-          'bitrate': int? bitrate,
-          'user_limit': int? user_limit,
-          'rate_limit_per_user': int? rate_limit_per_user,
-          'recipients': List<User> recipients,
-          'icon': String? icon,
-          'ownerId': Snowflake? ownerId,
-          'applicationId': Snowflake? applicationId,
-          'managed': bool? managed,
-          'parentId': Snowflake? parentId,
-          'lastPinTimestamp': String? lastPinTimestamp,
-          'rtcRegion': String? rtcRegion,
-          'video_quality_mode': int? video_quality_mode,
-          'message_count': int? message_count,
-          'member_count': int? member_count,
-          'thread_metadata': ThreadMetadata? thread_metadata,
-          'member': ThreadMember? member,
-          'default_auto_archive_duration': int? default_auto_archive_duration,
-          'permissions': String? permissions,
-          'flags': int? flags,
-          'total_message_sent': int? total_message_sent,
-          'available_tags': JsonList available_tags,
-          'applied_tags': JsonList applied_tags,
-          'default_reaction_emoji': DefaultReaction? default_reaction_emoji,
-          'default_thread_rate_limit_per_user': int?
-              default_thread_rate_limit_per_user,
-          'default_sort_order': int? default_sort_order,
-          'default_forum_layout': int? default_forum_layout,
+          'id': String id,
+          'type': int type,
         }) {
+      var (
+        String? guildId,
+        int? position,
+        JsonList? permissionOverwrites,
+        String? name,
+        String? topic,
+        bool? nsfw,
+        String? lastMessageId,
+        int? bitrate,
+        int? userLimit,
+        int? rateLimitPerUser,
+        JsonList? recipients,
+        String? icon,
+        String? ownerId,
+        String? applicationId,
+        bool? managed,
+        String? parentId,
+        String? lastPinTimestamp,
+        String? rtcRegion,
+        int? videoQualityMode,
+        int? messageCount,
+        int? memberCount,
+        JsonMap? threadMetadata,
+        JsonMap? member,
+        int? defaultAutoArchiveDuration,
+        String? permissions,
+        int? flags,
+        int? totalMessageSent,
+        JsonList? availableTags,
+        JsonList? appliedTags,
+        JsonMap? defaultReactionEmoji,
+        int? defaultThreadRateLimitPerUser,
+        int? defaultSortOrder,
+        int? defaultForumLayout,
+      ) = (
+        json['guild_id'] as String?,
+        json['position'] as int?,
+        json['permission_overwrites'] as JsonList?,
+        json['name'] as String?,
+        json['topic'] as String?,
+        json['nsfw'] as bool?,
+        json['lastMessage_id'] as String?,
+        json['bitrate'] as int?,
+        json['user_limit'] as int?,
+        json['rate_limit_per_user'] as int?,
+        json['recipients'] as JsonList?,
+        json['icon'] as String?,
+        json['owner_id'] as String?,
+        json['application_id'] as String?,
+        json['managed'] as bool?,
+        json['parent_id'] as String?,
+        json['last_pin_timestamp'] as String?,
+        json['rtc_region'] as String?,
+        json['video_quality_mode'] as int?,
+        json['message_count'] as int?,
+        json['member_count'] as int?,
+        json['thread_metadata'] as JsonMap?,
+        json['member'] as JsonMap?,
+        json['default_auto_archive_duration'] as int?,
+        json['permissions'] as String?,
+        json['flags'] as int?,
+        json['total_message_sent'] as int?,
+        json['available_tags'] as JsonList?,
+        json['applied_tags'] as JsonList?,
+        json['default_reaction_emoji'] as JsonMap?,
+        json['default_thread_rate_limit_per_user'] as int?,
+        json['default_sort_order'] as int?,
+        json['default_forum_layout'] as int?,
+      );
       return Channel._(
-        id,
-        type,
-        guildId,
+        Snowflake.fromJson(id),
+        ChannelType.fromInt(type),
+        guildId == null ? null : Snowflake.fromJson(guildId),
         position,
-        permissionOverwrites,
+        permissionOverwrites == null
+            ? null
+            : List<Overwrite>.from(permissionOverwrites),
         name,
         topic,
         nsfw,
-        lastMessageId,
+        lastMessageId == null ? null : Snowflake.fromJson(lastMessageId),
         bitrate,
-        user_limit,
-        rate_limit_per_user,
-        recipients,
+        userLimit,
+        rateLimitPerUser,
+        recipients == null ? null : List<User>.from(recipients),
         icon,
-        ownerId,
-        applicationId,
+        ownerId == null ? null : Snowflake.fromJson(ownerId),
+        applicationId == null ? null : Snowflake.fromJson(applicationId),
         managed,
-        parentId,
+        parentId == null ? null : Snowflake.fromJson(parentId),
         lastPinTimestamp,
         rtcRegion,
-        video_quality_mode,
-        message_count,
-        member_count,
-        thread_metadata,
-        member,
-        default_auto_archive_duration,
+        videoQualityMode,
+        messageCount,
+        memberCount,
+        threadMetadata == null ? null : ThreadMetadata.fromJson(threadMetadata),
+        member == null ? null : ThreadMember.fromJson(member),
+        defaultAutoArchiveDuration,
         permissions,
         flags,
-        total_message_sent,
-        List<ForumTag>.from(available_tags),
-        List<Snowflake>.from(applied_tags),
-        default_reaction_emoji,
-        default_thread_rate_limit_per_user,
-        default_sort_order,
-        default_forum_layout,
+        totalMessageSent,
+        availableTags == null ? null : List<ForumTag>.from(availableTags),
+        appliedTags == null ? null : List<Snowflake>.from(appliedTags),
+        defaultReactionEmoji == null
+            ? null
+            : DefaultReaction.fromJson(defaultReactionEmoji),
+        defaultThreadRateLimitPerUser,
+        defaultSortOrder,
+        defaultForumLayout,
       );
     } else {
-      throw MalformedJsonException('''
-      Expected:
-        {
-          'id': Snowflake,
-          'type': ChannelType,
-          'guildId': Snowflake?,
-          'position': int?,
-          'permissionOverwrites': List<Overwrite>,
-          'name': String?,
-          'topic': String?,
-          'nsfw': bool?,
-          'lastMessageId': Snowflake?,
-          'bitrate': int?,
-          'user_limit': int?,
-          'rate_limit_per_user': int?,
-          'recipients': List<User>,
-          'icon': String?,
-          'ownerId': Snowflake?,
-          'applicationId': Snowflake?,
-          'managed': bool?,
-          'parentId': Snowflake?,
-          'lastPinTimestamp': String?,
-          'rtcRegion': String?,
-          'video_quality_mode': int?,
-          'message_count': int?,
-          'member_count': int?,
-          'thread_metadata': ThreadMetadata?,
-          'member': ThreadMember?,
-          'default_auto_archive_duration': int?,
-          'permissions': String?,
-          'flags': int?,
-          'total_message_sent': int?,
-          'available_tags': JsonList,
-          'applied_tags': JsonList,
-          'default_reaction_emoji': DefaultReaction?,
-          'default_thread_rate_limit_per_user': int?,
-          'default_sort_order': int?,
-          'default_forum_layout': int?,
-        }
-      ''', json);
+      throw MalformedJsonMapException({
+        'id': String,
+        'type': int,
+        'guild_id': Nullable<String>,
+        'position': Nullable<int>,
+        'permission_overwrites': List<String>,
+        'name': Nullable<String>,
+        'topic': Nullable<String>,
+        'nsfw': Nullable<bool>,
+        'last_message_id': Nullable<String>,
+        'bitrate': Nullable<int>,
+        'user_limit': Nullable<int>,
+        'rate_limit_per_user': Nullable<int>,
+        'recipients': List<JsonMap>,
+        'icon': Nullable<String>,
+        'owner_id': Nullable<String>,
+        'application_id': Nullable<String>,
+        'managed': Nullable<bool>,
+        'parent_id': Nullable<String>,
+        'last_pin_timestamp': Nullable<String>,
+        'rtc_region': Nullable<String>,
+        'video_quality_mode': Nullable<int>,
+        'message_count': Nullable<int>,
+        'member_count': Nullable<int>,
+        'thread_metadata': Nullable<JsonMap>,
+        'member': Nullable<JsonMap>,
+        'default_auto_archive_duration': Nullable<int>,
+        'permissions': Nullable<String>,
+        'flags': Nullable<int>,
+        'total_message_sent': Nullable<int>,
+        'available_tags': JsonList,
+        'applied_tags': JsonList,
+        'default_reaction_emoji': Nullable<JsonMap>,
+        'default_thread_rate_limit_per_user': Nullable<int>,
+        'default_sort_order': Nullable<int>,
+        'default_forum_layout': Nullable<int>,
+      }, json);
     }
   }
 }
