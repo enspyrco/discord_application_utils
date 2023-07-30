@@ -1,5 +1,6 @@
-import 'package:discord_application_utils/src/guild/welcome_screen_channel.dart';
 import 'package:json_utils/json_utils.dart';
+
+import 'welcome_screen_channel.dart';
 
 // https://discord.com/developers/docs/resources/guild#welcome-screen-object
 final class WelcomeScreen {

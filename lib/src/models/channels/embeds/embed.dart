@@ -1,11 +1,11 @@
-import 'package:discord_application_utils/src/channels/embeds/embed_provider.dart';
-import 'package:discord_application_utils/src/channels/embeds/embed_thumbnail.dart';
 import 'package:json_utils/json_utils.dart';
 
 import 'embed_author.dart';
 import 'embed_field.dart';
 import 'embed_footer.dart';
 import 'embed_image.dart';
+import 'embed_provider.dart';
+import 'embed_thumbnail.dart';
 import 'embed_video.dart';
 
 // https://discord.com/developers/docs/resources/channel#embed-object-embed-structure

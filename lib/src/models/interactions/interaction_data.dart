@@ -29,7 +29,7 @@ class InteractionData {
 
   // the params + values from the user
   // This can be partial when in response to APPLICATION_COMMAND_AUTOCOMPLETE
-  final List<InteractionDataOption> options;
+  final List<InteractionDataOption>? options;
 
   // snowflake	the id of the guild the command is registered to
   final String? guildId;
@@ -60,12 +60,10 @@ class InteractionData {
         name,
         type,
         resolved == null ? null : ResolvedData.fromJson(resolved),
-        options == null
-            ? []
-            : options
-                .map<InteractionDataOption>(
-                    (e) => InteractionDataOption.fromJson(e as JsonMap))
-                .toList(),
+        options
+            ?.map<InteractionDataOption>(
+                (e) => InteractionDataOption.fromJson(e as JsonMap))
+            .toList(),
         guildId,
         targetId,
       );

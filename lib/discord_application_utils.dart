@@ -3,6 +3,7 @@
 ///
 library;
 
-export 'src/interactions/interaction.dart';
-export 'src/interactions/interaction_data.dart';
-export 'src/channels/messages/message.dart';
+export 'src/models/interactions/interaction.dart';
+export 'src/models/interactions/interaction_data.dart';
+export 'src/models/channels/messages/message.dart';
+export 'src/discord_interactor.dart';

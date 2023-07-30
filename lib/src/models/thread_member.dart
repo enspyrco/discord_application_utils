@@ -1,7 +1,7 @@
-import 'package:discord_application_utils/src/snowflake.dart';
 import 'package:json_utils/json_utils.dart';
 
 import 'guild_member.dart';
+import 'snowflake.dart';
 
 // https://discord.com/developers/docs/resources/channel#thread-member-object-thread-member-structure
 class ThreadMember {

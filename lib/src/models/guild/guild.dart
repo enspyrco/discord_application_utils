@@ -1,10 +1,10 @@
-import 'package:discord_application_utils/src/emoji/emoji.dart';
-import 'package:discord_application_utils/src/guild/welcome_screen.dart';
-import 'package:discord_application_utils/src/snowflake.dart';
 import 'package:json_utils/json_utils.dart';
 
+import '../emoji/emoji.dart';
 import '../role.dart';
+import '../snowflake.dart';
 import '../stickers/sticker.dart';
+import 'welcome_screen.dart';
 
 // https://discord.com/developers/docs/resources/guild#guild-object-guild-structure
 final class Guild {

@@ -1,8 +1,8 @@
 import 'package:json_utils/json_utils.dart';
 
-import '../discord_application_utils.dart';
 import 'channels/attachment.dart';
 import 'channels/channel.dart';
+import 'channels/messages/message.dart';
 import 'guild_member.dart';
 import 'role.dart';
 import 'snowflake.dart';

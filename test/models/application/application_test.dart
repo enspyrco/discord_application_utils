@@ -1,4 +1,4 @@
-import 'package:discord_application_utils/src/application/application.dart';
+import 'package:discord_application_utils/src/models/application/application.dart';
 import 'package:test/test.dart';
 
 import '../../data/example_application_object.dart';

@@ -1,5 +1,6 @@
-import 'package:discord_application_utils/src/snowflake.dart';
 import 'package:json_utils/json_utils.dart';
+
+import 'snowflake.dart';
 
 // https://discord.com/developers/docs/resources/channel#overwrite-object
 //

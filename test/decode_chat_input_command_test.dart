@@ -16,8 +16,8 @@ void main() {
     final Interaction interaction = Interaction.fromJson(decodedJson);
 
     expect(interaction.applicationId, '1126810994593771540');
-    expect(interaction.data?.options.first.name, 'url');
-    expect(interaction.data?.options.first.value, 'testing any value');
+    expect(interaction.data?.options?.first.name, 'url');
+    expect(interaction.data?.options?.first.value, 'testing any value');
     // expect(data.token, 'fakeToken0');
     // expect(
     //     data.content,

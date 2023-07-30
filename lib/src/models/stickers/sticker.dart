@@ -1,6 +1,6 @@
-import 'package:discord_application_utils/src/snowflake.dart';
 import 'package:json_utils/json_utils.dart';
 
+import '../snowflake.dart';
 import '../user.dart';
 
 // https://discord.com/developers/docs/resources/sticker#sticker-object
