@@ -36,7 +36,7 @@ class DiscordInteractor {
   }
 
   // Make a http call to edit the interaction response
-  Future<void> updateInteractionResponse(Object jsonValue) async {
+  Future<void> updateResponse(Object jsonValue) async {
     var response = await patch(_responseUrl, body: {'content': jsonValue});
     if (response.statusCode != 200) {
       throw ResponseException(response);

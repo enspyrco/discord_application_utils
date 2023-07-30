@@ -6,7 +6,11 @@
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+A `DiscordInteractor` can be created with `Interaction` data sent by Discord
+then used to manage the interaction, for example:
+
+- update the interaction response that was automatically created on the client
+  in response to a command, from the "waiting" state to a provided response value.
 
 ## Getting started
 
@@ -16,7 +20,7 @@ start using the package.
 ## Usage
 
 TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+to `/example` folder.
 
 ```dart
 const like = 'sample';
